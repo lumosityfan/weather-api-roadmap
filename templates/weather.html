@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% if weather %}
+        <div class="card flex-shrink-0" style="width: 100%;">
+            <div class="card-body">
+                <div class="card-body"><h2>Current Weather in {{ weather['resolvedAddress'] }}</h2></div>
+                <p>Temperature: {{ weather['currentConditions']['temp'] }}°F</p>
+                <p>Conditions: {{ weather['currentConditions']['conditions'] }}</p>
+                <p>Humidity: {{ weather['currentConditions']['humidity'] }}%</p>
+                <p>Wind Speed: {{ weather['currentConditions']['windspeed'] }} mph</p>
+                <p>Visibility: {{ weather['currentConditions']['visibility'] }} miles</p>
+                <p>UV Index: {{ weather['currentConditions']['uvindex'] }}</p>
+                <p>Precipitation: {{ weather['currentConditions']['precip'] }} inches</p>
+                <p>Cloud Cover: {{ weather['currentConditions']['cloudcover'] }}%</p>
+                <p>Pressure: {{ weather['currentConditions']['pressure'] }} mb</p>
+                <p>Feels Like: {{ weather['currentConditions']['feelslike'] }}°F</p>
+                <p>Sunrise: {{ weather['currentConditions']['sunrise'] }}</p>
+                <p>Sunset: {{ weather['currentConditions']['sunset'] }}</p>
+            </div>
+        </div>
+        <div class="d-flex overflow-auto gap-3 py-3">
+            {% for day in weather['days'] %}
+                <div class="card flex-shrink-0" style="width: 200px;">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ day['datetime'] }}</h6>
+                        <p class="card-text mb-1">🌡️ {{ day['tempmax'] }}°F / {{ day['tempmin'] }}°F</p>
+                        <p class="card-text mb-1">🌤️ {{ day['conditions'] }}</p>
+                        <p class="card-text mb-0">🌧️ {{ day['precip'] }} in</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% elif error %}
+        <p>Weather data is not available at the moment.</p>
+        <p class="error">Error: {{ error }}</p>
+    {% endif %}
+
+    <button class="btn btn-secondary mt-3"><a href="/" class="text-white text-decoration-none">Back to Home</a></button>
+</body>
+</html>
