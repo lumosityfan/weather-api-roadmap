@@ -9,6 +9,35 @@
 <body>
     <h1>Roadmap.sh Weather Website</h1>
     <p>This website provides weather information for various locations.</p>
+    <div class="mb-3">
+    <label for="latitude" class="form-label">Latitude</label>
+    <input type="range" class="form-range" min="-90" max="90" step="0.1" id="latitude">
+    <output for="latitude" id="latitudeValue" aria-hidden="true"></output>
+    </div>
+    <div class="mb-3">
+    <label for="longitude" class="form-label">Longitude</label>
+    <input type="range" class="form-range" min="-180" max="180" step="0.1" id="longitude">
+    <output for="longitude" id="longitudeValue" aria-hidden="true"></output>
+    </div>
+
+    <script>
+        const latitudeInput = document.getElementById('latitude');
+        const latitudeOutput = document.getElementById('latitudeValue');
+        const longitudeInput = document.getElementById('longitude');
+        const longitudeOutput = document.getElementById('longitudeValue');
+
+        // Set initial values
+        latitudeOutput.textContent = latitudeInput.value;
+        longitudeOutput.textContent = longitudeInput.value;
+
+        latitudeInput.addEventListener('input', function() {
+            latitudeOutput.textContent = this.value;
+        });
+
+        longitudeInput.addEventListener('input', function() {
+            longitudeOutput.textContent = this.value;
+        });
+    </script>
     {% if weather %}
         <div class="card flex-shrink-0" style="width: 100%;">
             <div class="card-body">
