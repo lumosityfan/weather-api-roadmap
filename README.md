@@ -13,8 +13,10 @@ and click on the localhost link in the terminal that the program provides.
 
 You need to provide various environment variables before this program can work fully.
 
+```
 VisualCrossing API Key
 Redis Database Host
 Redis Database Port
 Redis Database Username
 Redis Database Password
+```
